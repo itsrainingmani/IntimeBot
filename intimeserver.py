@@ -1,18 +1,22 @@
 from flask import Flask, request
 import json
 import requests
+import os
+import redis
+
 
 app = Flask(__name__)
+r = redis.from_url(os.environ.get("REDIS_URL"))
 
 # This needs to be filled with the Page Access Token that will be provided
 # by the Facebook App that will be created.
 PAT = 'EAAZA4OBTtCCwBAJHNwir2a4SkxexHBKbLbcrZCklQxpn7gpqe7UiEgP4n9eiYjfmyhfT91TlWMQFCnTxAV7U41opSTy7BhOK4PkMVFiXotjk3nd8K84WMrvGTZAJv4WYfZAwWjY8GzskgjBLnBCJePIZAUWS0uzest2bou98KegZDZD'
-
+VERIFY_TOKEN = "my_voice_is_my_password_verify_me"
 
 @app.route('/', methods=['GET'])
 def handle_verification():
     print "Handling Verification."
-    if request.args.get('hub.verify_token', '') == 'my_voice_is_my_password_verify_me':
+    if request.args.get('hub.verify_token', '') == VERIFY_TOKEN:
         print "Verification successful!"
         return request.args.get('hub.challenge', '')
     else:
