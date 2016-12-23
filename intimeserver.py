@@ -13,6 +13,7 @@ r = redis.from_url(os.environ.get("REDIS_URL"))
 PAT = 'EAAZA4OBTtCCwBAJHNwir2a4SkxexHBKbLbcrZCklQxpn7gpqe7UiEgP4n9eiYjfmyhfT91TlWMQFCnTxAV7U41opSTy7BhOK4PkMVFiXotjk3nd8K84WMrvGTZAJv4WYfZAwWjY8GzskgjBLnBCJePIZAUWS0uzest2bou98KegZDZD'
 VERIFY_TOKEN = "my_voice_is_my_password_verify_me"
 
+
 @app.route('/', methods=['GET'])
 def handle_verification():
     print "Handling Verification."
